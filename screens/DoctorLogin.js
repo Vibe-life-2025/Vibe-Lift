@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 
 const DoctorLoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <Image source={require('../assets/login.png')} style={styles.image} />
       <Text style={styles.title}>Doctor Login</Text>
       <Text style={styles.subtitle}>Please enter your credentials</Text>
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <Button title="Login" color="#24C17C" onPress={() => navigation.navigate('DoctorHome')} />
+      <Button title="Login" color="#24C17C" onPress={() => navigation.navigate('DoctorsHome')} />
     </View>
   );
 };
@@ -18,10 +19,15 @@ export default DoctorLoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '09D85F',
+    backgroundColor: '#EAF8F1',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
   title: {
     fontSize: 26,
@@ -35,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '100%',
+    width: '80%',
     padding: 10,
     marginBottom: 10,
     borderWidth: 1,

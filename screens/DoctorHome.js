@@ -1,31 +1,34 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
-const DoctorHomeScreen = ({ navigation }) => {
+const DoctorsHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hello, Dr. Sahana V</Text>
-      <Text style={styles.subtitle}>How is your day going?</Text>
+      <Image source={require('../assets/doctor.png')} style={styles.image} />
+      <Text style={styles.title}>Welcome, Doctor</Text>
+      <Text style={styles.subtitle}>Manage your appointments and reports</Text>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Join Your Consultations</Text>
-        <Button title="1-on-1 Sessions" color="#24C17C" onPress={() => navigation.navigate('AppointmentBooking')} />
+        <Button title="View Appointments" color="#24C17C" onPress={() => navigation.navigate('AppointmentBooking')} />
+        <Button title="Manage Reports" color="#FFD700" onPress={() => navigation.navigate('Reports')} />
       </View>
-      <View style={styles.section}>
-        <Button title="Doctor's Profile" color="#FFD700" onPress={() => {}} />
-        <Button title="Patient's Profile" color="#FFD700" onPress={() => {}} />
-      </View>
-      <Button title="Join with us" color="#24C17C" onPress={() => {}} style={styles.joinButton} />
     </View>
   );
 };
 
-export default DoctorHomeScreen;
+export default DoctorsHomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '09D85F',
+    backgroundColor: '#EAF8F1',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
   title: {
     fontSize: 26,
@@ -39,18 +42,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   section: {
-    backgroundColor: '#F8F9FA',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  joinButton: {
+    width: '100%',
+    alignItems: 'center',
     marginTop: 20,
   },
 });

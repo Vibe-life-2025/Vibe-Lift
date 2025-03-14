@@ -1,30 +1,34 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
-const PatientHomeScreen = () => {
+const PatientsHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <Image source={require('../assets/patient.png')} style={styles.image} />
       <Text style={styles.title}>Welcome, Patient</Text>
-      <Text style={styles.subtitle}>Your health is our priority.</Text>
+      <Text style={styles.subtitle}>Your health is our priority</Text>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Your Appointments</Text>
-        <Button title="View Appointments" color="#24C17C" onPress={() => {}} />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Consult Your Doctor</Text>
-        <Button title="Book a Session" color="#FFD700" onPress={() => {}} />
+        <Button title="Book Appointment" color="#24C17C" onPress={() => navigation.navigate('AppointmentBooking')} />
+        <Button title="View Reports" color="#FFD700" onPress={() => navigation.navigate('Reports')} />
       </View>
     </View>
   );
 };
 
-export default PatientHomeScreen;
+export default PatientsHomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '09D85F',
+    backgroundColor: '#EAF8F1',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
   title: {
     fontSize: 26,
@@ -38,15 +42,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   section: {
-    backgroundColor: '#F8F9FA',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 20,
   },
 });
