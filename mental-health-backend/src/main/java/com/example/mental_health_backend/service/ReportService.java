@@ -1,7 +1,7 @@
-package com.example.mentalhealth.service;
+package com.example.mental_health_backend.service;
 
-import com.example.mentalhealth.entity.Report;
-import com.example.mentalhealth.repository.ReportRepository;
+import com.example.mental_health_backend.entity.Report;
+import com.example.mental_health_backend.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

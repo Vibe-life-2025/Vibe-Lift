@@ -1,7 +1,7 @@
-package com.example.mentalhealth.controller;
+package com.example.mental_health_backend.controller;
 
-import com.example.mentalhealth.entity.Report;
-import com.example.mentalhealth.service.ReportService;
+import com.example.mental_health_backend.entity.Report;
+import com.example.mental_health_backend.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

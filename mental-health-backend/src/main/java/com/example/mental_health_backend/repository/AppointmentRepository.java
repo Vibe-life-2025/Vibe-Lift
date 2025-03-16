@@ -1,6 +1,6 @@
-package com.example.mentalhealth.repository;
+package com.example.mental_health_backend.repository;
 
-import com.example.mentalhealth.entity.Appointment;
+import com.example.mental_health_backend.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

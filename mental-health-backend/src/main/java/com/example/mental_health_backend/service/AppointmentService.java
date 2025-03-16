@@ -1,8 +1,8 @@
-package com.example.mentalhealth.service;
+package com.example.mental_health_backend.service;
 
-import com.example.mentalhealth.entity.Appointment;
-import com.example.mentalhealth.entity.Appointment.AppointmentStatus;
-import com.example.mentalhealth.repository.AppointmentRepository;
+import com.example.mental_health_backend.entity.Appointment;
+import com.example.mental_health_backend.entity.Appointment.AppointmentStatus;
+import com.example.mental_health_backend.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

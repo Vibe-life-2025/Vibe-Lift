@@ -1,4 +1,4 @@
-package com.example.mentalhealth.entity;
+package com.example.mental_health_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

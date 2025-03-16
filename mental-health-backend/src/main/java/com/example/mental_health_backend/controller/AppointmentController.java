@@ -1,8 +1,8 @@
-package com.example.mentalhealth.controller;
+package com.example.mental_health_backend.controller;
 
-import com.example.mentalhealth.entity.Appointment;
-import com.example.mentalhealth.entity.Appointment.AppointmentStatus;
-import com.example.mentalhealth.service.AppointmentService;
+import com.example.mental_health_backend.entity.Appointment;
+import com.example.mental_health_backend.entity.Appointment.AppointmentStatus;
+import com.example.mental_health_backend.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
