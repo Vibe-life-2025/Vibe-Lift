@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function DoctorCalendar() {
+const DoctorCalendar = () => {
   return (
     <View>
-      <Text>Doctor's Calendar</Text>
+      <Text>Doctor Calendar</Text>
     </View>
   );
-}
+};
+
+export default DoctorCalendar;

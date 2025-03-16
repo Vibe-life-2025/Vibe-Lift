@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 
-export default function AppointmentBooking({ navigation }) {
+const AppointmentBooking = () => {
   return (
     <View>
-      <Text>Book an Appointment</Text>
-      <Button title="Go Back" onPress={() => navigation.goBack()} />
+      <Text>Appointment Booking</Text>
     </View>
   );
-}
+};
+
+export default AppointmentBooking;
