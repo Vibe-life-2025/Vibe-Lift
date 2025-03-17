@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
-import { fetchAppointments, updateAppointmentStatus } from "../API/appointmentApi";
+import { fetchDoctorAppointments, updateAppointmentStatus } from "../API/appointmentApi";
 
-const AppointmentManagement = () => {
+const AppointmentManagement = ({ doctorId }) => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     const loadAppointments = async () => {
-      const data = await fetchAppointments();
+      const data = await fetchDoctorAppointments(doctorId);
       setAppointments(data);
     };
     loadAppointments();
-  }, []);
+  }, [doctorId]);
 
   const handleAction = async (appointmentId, status) => {
     try {
@@ -26,7 +26,7 @@ const AppointmentManagement = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Manage Appointments</Text>
+      <Text style={styles.header}>Your Appointments</Text>
       {appointments.length === 0 ? (
         <Text>No appointments available.</Text>
       ) : (
