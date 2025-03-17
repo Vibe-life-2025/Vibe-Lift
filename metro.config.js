@@ -1,12 +1,8 @@
-import { getDefaultConfig } from '@react-native/metro-config';
+// Import Metro config
+const { getDefaultConfig } = require("@react-native/metro-config");
 
+// Get default configuration
 const defaultConfig = getDefaultConfig(__dirname);
 
-export default {
-  ...defaultConfig,
-  resolver: {
-    extraNodeModules: {
-      '@': `${__dirname}/src`,
-    },
-  },
-};
+// Export the configuration
+module.exports = defaultConfig;
