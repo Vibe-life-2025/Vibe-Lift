@@ -1,16 +1,17 @@
-<!-- pom.xml: Maven build configuration -->
+<!-- This file tells Maven what libraries our project needs.
+     We’re using Spring Boot Web for REST APIs, Spring Data MongoDB for database access,
+     and Lombok to cut down on boilerplate code. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.example</groupId>
 	<artifactId>mental-health-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Mental Health Backend</name>
-	<description>Backend for Mental Health App</description>
+	<description>Backend for Mental Health App using MongoDB</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -24,26 +25,19 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot Starter Web: For building REST APIs -->
+		<!-- REST API support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Boot Starter Data JPA: For ORM and database interaction -->
+		<!-- MongoDB support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 
-		<!-- MySQL Driver: For connecting to MySQL database -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- Lombok: To reduce boilerplate code -->
+		<!-- Lombok to simplify code -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -51,13 +45,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Spring Boot Starter Security: (Optional) For security features -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<!-- Testing dependencies -->
+		<!-- Testing  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -67,18 +55,10 @@
 
 	<build>
 		<plugins>
-			<!-- Spring Boot Maven Plugin -->
+			<!-- Package and run our Spring Boot app -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
