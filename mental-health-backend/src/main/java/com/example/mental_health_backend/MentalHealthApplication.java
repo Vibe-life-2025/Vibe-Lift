@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Main entry point for the Mental Health Backend application.
- * The @SpringBootApplication annotation enables auto-configuration, component scanning, and configuration properties support.
+ * This is our main application class.
+ * Running the main() method will start the Spring Boot server.
  */
 @SpringBootApplication
 public class MentalHealthApplication {
