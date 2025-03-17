@@ -1,62 +1,73 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import DoctorsHomeScreen from './screens/DoctorsHome';
-import AppointmentBookingScreen from './screens/AppointmentBooking';
-import DoctorCalendarScreen from './screens/DoctorCalendar';
-import NotificationsScreen from './screens/Notifications';
-import ReportsScreen from './screens/Reports';
-import DoctorLoginScreen from './screens/DoctorLogin';
-import PatientSelectionScreen from './screens/PatientSelection';
-import PatientsHomeScreen from './screens/PatientsHome';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Image, Alert } from 'react-native';
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const DoctorLoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-const themeColors = {
-  primary: '#24C17C',
-  secondary: '#F8F9FA',
-  text: '#333',
-  accent: '#FFD700',
-  background: '#EAF8F1',
-  tabInactive: '#A0A0A0',
-  cardBackground: '#FFFFFF',
+  const handleLogin = () => {
+    if (username.trim() === '' || password.trim() === '') {
+      Alert.alert('Error', 'Please enter both username and password');
+    } else {
+      navigation.navigate('DoctorHome');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image source={require('../assets/images/doctor.png')} style={styles.image} />
+      <Text style={styles.title}>Doctor Login</Text>
+      <Text style={styles.subtitle}>Please enter your credentials</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      <Button title="Login" color="#24C17C" onPress={handleLogin} />
+    </View>
+  );
 };
 
-// Doctor's Bottom Tab Navigator
-function DoctorTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={DoctorsHomeScreen} />
-      <Tab.Screen name="Sessions" component={AppointmentBookingScreen} />
-      <Tab.Screen name="Activity" component={DoctorCalendarScreen} />
-      <Tab.Screen name="Community" component={NotificationsScreen} />
-    </Tab.Navigator>
-  );
-}
+export default DoctorLoginScreen;
 
-// Patient's Bottom Tab Navigator
-function PatientTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Dashboard" component={PatientsHomeScreen} />
-      <Tab.Screen name="Appointments" component={AppointmentBookingScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="DoctorLogin" component={DoctorLoginScreen} />
-        <Stack.Screen name="PatientSelection" component={PatientSelectionScreen} />
-        <Stack.Screen name="DoctorsHome" component={DoctorTabs} />
-        <Stack.Screen name="PatientsHome" component={PatientTabs} />
-        <Stack.Screen name="AppointmentBooking" component={AppointmentBookingScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EAF8F1',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
+  },
+  input: {
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+});

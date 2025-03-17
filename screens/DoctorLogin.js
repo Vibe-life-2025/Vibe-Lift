@@ -4,12 +4,12 @@ import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 const DoctorLoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/login.png')} style={styles.image} />
+      <Image source={require('../assets/images/doctor.png')} style={styles.image} />
       <Text style={styles.title}>Doctor Login</Text>
       <Text style={styles.subtitle}>Please enter your credentials</Text>
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <Button title="Login" color="#24C17C" onPress={() => navigation.navigate('DoctorsHome')} />
+      <Button title="Login" color="#24C17C" onPress={() => navigation.navigate('DoctorHome')} />
     </View>
   );
 };

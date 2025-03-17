@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
-const DoctorsHomeScreen = ({ navigation }) => {
+const DoctorHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/doctor.png')} style={styles.image} />
+      <Image source={require('../assets/images/doctor.png')} style={styles.image} />
       <Text style={styles.title}>Welcome, Doctor</Text>
       <Text style={styles.subtitle}>Manage your appointments and reports</Text>
       <View style={styles.section}>
@@ -15,7 +15,7 @@ const DoctorsHomeScreen = ({ navigation }) => {
   );
 };
 
-export default DoctorsHomeScreen;
+export default DoctorHomeScreen;
 
 const styles = StyleSheet.create({
   container: {
