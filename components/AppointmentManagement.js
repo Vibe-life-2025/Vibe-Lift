@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
-import { fetchDoctorAppointments, updateAppointmentStatus } from "../API/appointmentApi";
+import { View, Text, Button, FlatList, StyleSheet, Alert } from "react-native";
+import { fetchAppointments, updateAppointmentStatus } from "../API/appointmentApi";
 
-const AppointmentManagement = ({ doctorId }) => {
+const AppointmentManagement = ({ route }) => {
+  const doctorId = route.params?.doctorId; // Get doctor ID from navigation params
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     const loadAppointments = async () => {
-      const data = await fetchDoctorAppointments(doctorId);
+      const data = await fetchAppointments(doctorId);
       setAppointments(data);
     };
     loadAppointments();
@@ -16,17 +17,17 @@ const AppointmentManagement = ({ doctorId }) => {
   const handleAction = async (appointmentId, status) => {
     try {
       await updateAppointmentStatus(appointmentId, status);
-      alert(`Appointment ${status}`);
+      Alert.alert("Success", `Appointment ${status}`);
       setAppointments(appointments.filter((appt) => appt.id !== appointmentId));
     } catch (error) {
-      alert("Error updating appointment status");
+      Alert.alert("Error", "Could not update status");
       console.error(error);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Your Appointments</Text>
+      <Text style={styles.header}>Manage Appointments</Text>
       {appointments.length === 0 ? (
         <Text>No appointments available.</Text>
       ) : (
@@ -35,17 +36,12 @@ const AppointmentManagement = ({ doctorId }) => {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.appointmentCard}>
-              <Text style={styles.text}>{item.name} ({item.age})</Text>
-              <Text style={styles.text}>{item.email}</Text>
-              <Text style={styles.text}>Date: {item.sessionDate}</Text>
-
+              <Text style={styles.text}>
+                {item.patientName} - {item.appointmentDate}
+              </Text>
               <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.approveButton} onPress={() => handleAction(item.id, "Approved")}>
-                  <Text style={styles.buttonText}>Approve</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.declineButton} onPress={() => handleAction(item.id, "Declined")}>
-                  <Text style={styles.buttonText}>Decline</Text>
-                </TouchableOpacity>
+                <Button title="Approve" onPress={() => handleAction(item.id, "Approved")} color="green" />
+                <Button title="Decline" onPress={() => handleAction(item.id, "Declined")} color="lightgray" />
               </View>
             </View>
           )}
@@ -56,14 +52,11 @@ const AppointmentManagement = ({ doctorId }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "white" },
-  header: { fontSize: 22, fontWeight: "bold", color: "green", textAlign: "center", marginBottom: 15 },
-  appointmentCard: { padding: 10, borderWidth: 1, borderColor: "gray", marginBottom: 10, borderRadius: 5 },
-  text: { fontSize: 16, marginBottom: 5 },
-  buttonContainer: { flexDirection: "row", justifyContent: "space-between", marginTop: 10 },
-  approveButton: { backgroundColor: "green", padding: 10, borderRadius: 5, flex: 1, marginRight: 5 },
-  declineButton: { backgroundColor: "lightgray", padding: 10, borderRadius: 5, flex: 1, marginLeft: 5 },
-  buttonText: { color: "white", fontSize: 16, fontWeight: "bold", textAlign: "center" },
+  container: { padding: 20, backgroundColor: "white", flex: 1 },
+  header: { fontSize: 22, fontWeight: "bold", color: "green", marginBottom: 10 },
+  appointmentCard: { padding: 10, borderWidth: 1, marginBottom: 5 },
+  buttonContainer: { flexDirection: "row", justifyContent: "space-around", marginTop: 5 },
+  text: { fontSize: 16 },
 });
 
 export default AppointmentManagement;
