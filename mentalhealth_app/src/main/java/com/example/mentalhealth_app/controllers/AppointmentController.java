@@ -35,3 +35,4 @@ public class AppointmentController {
         return ResponseEntity.ok("Appointment status updated.");
     }
 }
+//Appointment controlled
