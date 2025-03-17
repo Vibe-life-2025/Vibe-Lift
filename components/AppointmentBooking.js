@@ -1,73 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button, Picker, StyleSheet, Alert } from "react-native";
-import { fetchDoctors, bookAppointment } from "../API/appointmentApi";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, Alert, Picker } from "react-native";
 
-const AppointmentBooking = () => {
-  const [doctors, setDoctors] = useState([]);
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
+const AppointmentBookingScreen = () => {
   const [patientName, setPatientName] = useState("");
-  const [patientAge, setPatientAge] = useState("");
   const [email, setEmail] = useState("");
-  const [appointmentDate, setAppointmentDate] = useState("");
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [doctors, setDoctors] = useState(["Dr. Smith", "Dr. Johnson", "Dr. Patel"]); // Mock doctor list
 
-  useEffect(() => {
-    const loadDoctors = async () => {
-      const data = await fetchDoctors();
-      setDoctors(data);
-    };
-    loadDoctors();
-  }, []);
-
-  const handleBooking = async () => {
-    if (!selectedDoctor || !patientName || !patientAge || !email || !appointmentDate) {
+  const bookAppointment = () => {
+    if (!patientName || !email || !selectedDoctor) {
       Alert.alert("Error", "Please fill all fields");
       return;
     }
 
-    const appointmentData = {
-      doctorId: selectedDoctor,
-      patientName,
-      patientAge,
-      email,
-      appointmentDate,
-    };
-
-    try {
-      await bookAppointment(appointmentData);
-      Alert.alert("Success", "Appointment booked successfully!");
-    } catch (error) {
-      Alert.alert("Error", "Could not book appointment");
-      console.error(error);
-    }
+    // Simulating API request with setTimeout
+    setTimeout(() => {
+      Alert.alert("Success", `Appointment booked with ${selectedDoctor}`);
+    }, 1000);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Book an Appointment</Text>
+    <View style={{ padding: 20 }}>
+      <Text>Patient Name:</Text>
+      <TextInput value={patientName} onChangeText={setPatientName} style={{ borderWidth: 1, marginBottom: 10 }} />
 
-      <Text style={styles.label}>Select Doctor</Text>
+      <Text>Email:</Text>
+      <TextInput value={email} onChangeText={setEmail} style={{ borderWidth: 1, marginBottom: 10 }} />
+
+      <Text>Select Doctor:</Text>
       <Picker selectedValue={selectedDoctor} onValueChange={setSelectedDoctor}>
-        <Picker.Item label="Choose a doctor" value={null} />
-        {doctors.map((doc) => (
-          <Picker.Item key={doc.id} label={doc.name} value={doc.id} />
+        <Picker.Item label="Select a Doctor" value={null} />
+        {doctors.map((doc, index) => (
+          <Picker.Item key={index} label={doc} value={doc} />
         ))}
       </Picker>
 
-      <TextInput style={styles.input} placeholder="Name" onChangeText={setPatientName} />
-      <TextInput style={styles.input} placeholder="Age" onChangeText={setPatientAge} keyboardType="numeric" />
-      <TextInput style={styles.input} placeholder="Email" onChangeText={setEmail} keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="YYYY-MM-DD HH:MM" onChangeText={setAppointmentDate} />
-
-      <Button title="Book Appointment" onPress={handleBooking} color="green" />
+      <Button title="Book Appointment" onPress={bookAppointment} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: { padding: 20, backgroundColor: "white", flex: 1 },
-  title: { fontSize: 24, fontWeight: "bold", color: "green", marginBottom: 10 },
-  label: { fontSize: 18, marginBottom: 5 },
-  input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 5 },
-});
-
-export default AppointmentBooking;
+export default AppointmentBookingScreen;
