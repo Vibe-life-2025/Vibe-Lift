@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 
-const PatientHome = ({ navigation }) => {
+const PatientHome = () => {
   return (
     <View>
-      <Text>Patient Home</Text>
-      <Button title="Select Doctor" onPress={() => navigation.navigate('PatientSelection')} />
+      <Text>Patients Home Screen</Text>
     </View>
   );
 };

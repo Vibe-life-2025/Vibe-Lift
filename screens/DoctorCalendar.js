@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const DoctorCalendar = () => {
   return (
     <View>
-      <Text>Doctor Calendar</Text>
+      <Text>Doctor Calendar Screen</Text>
     </View>
   );
 };

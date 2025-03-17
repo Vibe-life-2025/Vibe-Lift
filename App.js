@@ -1,62 +1,44 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import DoctorLogin from './screens/DoctorLogin';
-import PatientSelection from './screens/PatientSelection';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView, StyleSheet } from 'react-native';
+
+// Import Screens
+import AppointmentBooking from './screens/AppointmentBooking';
+import DoctorCalendar from './screens/DoctorCalendar';
 import DoctorHome from './screens/DoctorHome';
+import DoctorLogin from './screens/DoctorLogin';
+import Notifications from './screens/Notifications';
 import PatientHome from './screens/PatientHome';
-import { Ionicons } from '@expo/vector-icons';
+import PatientSelection from './screens/PatientSelection';
+import DetailsScreen from './screens/DetailsScreen';
 
-const AuthStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function DoctorTabs() {
+const App = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen 
-        name="DoctorHome" 
-        component={DoctorHome} 
-        options={{ 
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-          title: "Home"
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
-
-function PatientTabs() {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen 
-        name="PatientHome" 
-        component={PatientHome} 
-        options={{ 
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" size={size} color={color} />
-          ),
-          title: "Doctors"
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <NavigationContainer>
-        <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-          <AuthStack.Screen name="DoctorLogin" component={DoctorLogin} />
-          <AuthStack.Screen name="PatientSelection" component={PatientSelection} />
-          <AuthStack.Screen name="DoctorTabs" component={DoctorTabs} />
-          <AuthStack.Screen name="PatientTabs" component={PatientTabs} />
-        </AuthStack.Navigator>
+        <Stack.Navigator initialRouteName="DoctorHome" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="DoctorHome" component={DoctorHome} />
+          <Stack.Screen name="DoctorLogin" component={DoctorLogin} />
+          <Stack.Screen name="DoctorCalendar" component={DoctorCalendar} />
+          <Stack.Screen name="AppointmentBooking" component={AppointmentBooking} />
+          <Stack.Screen name="Notifications" component={Notifications} />
+          <Stack.Screen name="PatientHome" component={PatientHome} />
+          <Stack.Screen name="PatientSelection" component={PatientSelection} />
+          <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
-} 
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff', // Ensures no white screen issue
+  },
+});
+
+export default App;

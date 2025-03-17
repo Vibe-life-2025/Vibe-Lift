@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const PatientSelection = () => {
   return (
     <View>
-      <Text>Patient Selection</Text>
+      <Text>Patient Selection Screen</Text>
     </View>
   );
 };
