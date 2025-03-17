@@ -1,8 +1,4 @@
-// Import Metro config
-const { getDefaultConfig } = require("@react-native/metro-config");
+// metro.config.js
+const { getDefaultConfig } = require('@react-native/metro-config');
 
-// Get default configuration
-const defaultConfig = getDefaultConfig(__dirname);
-
-// Export the configuration
-module.exports = defaultConfig;
+module.exports = getDefaultConfig(__dirname);
