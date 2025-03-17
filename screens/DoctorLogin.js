@@ -18,7 +18,7 @@ export default DoctorLoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAF8F1',
+    backgroundColor: '09D85F',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
