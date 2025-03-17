@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 const PatientSelectionScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      
+      <Image source={require('../assets/images/patient.png')} style={styles.image} />
       <Text style={styles.title}>Select Patient Profile</Text>
       <Text style={styles.subtitle}>Tap to enter as a patient</Text>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PatientHome')}>

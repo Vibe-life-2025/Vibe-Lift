@@ -1,73 +1,73 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image, Alert } from 'react-native';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import DoctorHomeScreen from './screens/DoctorHome';
+import PatientHomeScreen from './screens/PatientHome';
+import DoctorLoginScreen from './screens/DoctorLogin';
+import PatientSelectionScreen from './screens/PatientSelection';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-const DoctorLoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-  const handleLogin = () => {
-    if (username.trim() === '' || password.trim() === '') {
-      Alert.alert('Error', 'Please enter both username and password');
-    } else {
-      navigation.navigate('DoctorHome');
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Image source={require('../assets/images/doctor.png')} style={styles.image} />
-      <Text style={styles.title}>Doctor Login</Text>
-      <Text style={styles.subtitle}>Please enter your credentials</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Login" color="#24C17C" onPress={handleLogin} />
-    </View>
-  );
+const themeColors = {
+  primary: '#24C17C',
+  secondary: '#F8F9FA',
+  text: '#333',
+  accent: '#FFD700',
+  background: '#EAF8F1',
+  tabInactive: '#A0A0A0',
+  cardBackground: '#FFFFFF',
 };
 
-export default DoctorLoginScreen;
+// Doctor's Bottom Tab Navigator
+function DoctorTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = route.name === 'Home' ? 'home' : 'clipboard';
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: themeColors.primary,
+        tabBarInactiveTintColor: themeColors.tabInactive,
+        tabBarStyle: { backgroundColor: themeColors.cardBackground, height: 65 },
+      })}
+    >
+      <Tab.Screen name="Home" component={DoctorHomeScreen} options={{ headerShown: false }} />
+    </Tab.Navigator>
+  );
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#EAF8F1',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  image: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 20,
-  },
-  input: {
-    width: '80%',
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-  },
-});
+// ✅ Patient's Bottom Tab Navigator - FIXED
+function PatientTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = route.name === 'Dashboard' ? 'person' : 'heart';
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: themeColors.primary,
+        tabBarInactiveTintColor: themeColors.tabInactive,
+        tabBarStyle: { backgroundColor: themeColors.cardBackground, height: 65 },
+      })}
+    >
+      <Tab.Screen name="Dashboard" component={PatientHomeScreen} options={{ headerShown: false }} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="DoctorLogin" component={DoctorLoginScreen} />
+        <Stack.Screen name="PatientSelection" component={PatientSelectionScreen} />
+        <Stack.Screen name="DoctorHome" component={DoctorTabs} />
+        <Stack.Screen name="PatientHome" component={PatientTabs} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

@@ -8,8 +8,8 @@ const PatientHomeScreen = ({ navigation }) => {
       <Text style={styles.title}>Welcome, Patient</Text>
       <Text style={styles.subtitle}>Your health is our priority</Text>
       <View style={styles.section}>
-        <Button title="Book Appointment" color="#24C17C" onPress={() => navigation.navigate('AppointmentBooking')} />
-        <Button title="View Reports" color="#FFD700" onPress={() => navigation.navigate('Reports')} />
+        <Button title="View Health Records" color="#24C17C" onPress={() => navigation.navigate('HealthRecords')} />
+        <Button title="Find a Doctor" color="#FFD700" onPress={() => navigation.navigate('DoctorSelection')} />
       </View>
     </View>
   );
