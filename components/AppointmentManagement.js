@@ -1,34 +1,53 @@
-import React, { useState } from "react";
-import { View, Text, Button, FlatList, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Button, FlatList, StyleSheet, Alert } from "react-native";
+import { fetchAppointments, updateAppointmentStatus } from "../API/appointmentApi";
 
-const AppointmentManagementScreen = () => {
-  const [appointments, setAppointments] = useState([
-    { id: "1", patient: "John Doe", date: "2025-03-14 10:00 AM" },
-    { id: "2", patient: "Alice Brown", date: "2025-03-15 2:00 PM" },
-  ]);
+const AppointmentManagement = ({ route }) => {
+  const doctorId = route.params?.doctorId || "1"; // Default doctor ID for testing
+  const [appointments, setAppointments] = useState([]);
 
-  const updateAppointmentStatus = (id, status) => {
-    setAppointments(appointments.filter(app => app.id !== id));
-    Alert.alert("Success", `Appointment ${status}`);
+  useEffect(() => {
+    const loadAppointments = async () => {
+      const data = await fetchAppointments(doctorId);
+      setAppointments(data);
+    };
+    loadAppointments();
+  }, [doctorId]);
+
+  const handleAction = async (appointmentId, status) => {
+    const result = await updateAppointmentStatus(appointmentId, status);
+    if (result.success) {
+      Alert.alert("Success", `Appointment ${status}`);
+      setAppointments(appointments.filter((appt) => appt.id !== appointmentId));
+    } else {
+      Alert.alert("Offline Mode", result.message);
+    }
   };
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Appointments</Text>
-      <FlatList
-        data={appointments}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View style={{ padding: 10, borderBottomWidth: 1 }}>
-            <Text>Patient: {item.patient}</Text>
-            <Text>Date: {item.date}</Text>
-            <Button title="Approve" onPress={() => updateAppointmentStatus(item.id, "Approved")} />
-            <Button title="Decline" onPress={() => updateAppointmentStatus(item.id, "Declined")} color="red" />
-          </View>
-        )}
-      />
+    <View style={styles.container}>
+      <Text style={styles.header}>Manage Appointments</Text>
+      {appointments.length === 0 ? (
+        <Text>No appointments available.</Text>
+      ) : (
+        <FlatList
+          data={appointments}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.appointmentCard}>
+              <Text style={styles.text}>
+                {item.patientName} - {item.appointmentDate}
+              </Text>
+              <View style={styles.buttonContainer}>
+                <Button title="Approve" onPress={() => handleAction(item.id, "Approved")} color="green" />
+                <Button title="Decline" onPress={() => handleAction(item.id, "Declined")} color="lightgray" />
+              </View>
+            </View>
+          )}
+        />
+      )}
     </View>
   );
 };
 
-export default AppointmentManagementScreen;
+export default AppointmentManagement;
