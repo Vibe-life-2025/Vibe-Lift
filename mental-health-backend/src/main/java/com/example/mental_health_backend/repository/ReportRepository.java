@@ -1,23 +1,15 @@
-package com.example.mental_health_backend.repository;
+package com.example.mentalhealth.repository;
 
-import com.example.mental_health_backend.entity.Report;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.mentalhealth.entity.Report;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Repository interface for Report entity.
- * Provides CRUD operations and a custom method to find reports by patient name and doctor id.
+ * This repository provides basic CRUD operations for reports.
+ * We also have a method to find reports by patient name and doctor ID.
  */
 @Repository
-public interface ReportRepository extends JpaRepository<Report, Long> {
-
-    /**
-     * Retrieves all reports for a given patient and doctor.
-     *
-     * @param patientName the name of the patient.
-     * @param doctorId the unique identifier of the doctor.
-     * @return a list of matching reports.
-     */
-    List<Report> findByPatientNameAndDoctorId(String patientName, Long doctorId);
+public interface ReportRepository extends MongoRepository<Report, String> {
+    List<Report> findByPatientNameAndDoctor_Id(String patientName, String doctorId);
 }

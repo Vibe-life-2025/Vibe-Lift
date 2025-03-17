@@ -1,54 +1,35 @@
-package com.example.mental_health_backend.service;
+package com.example.mentalhealth.service;
 
-import com.example.mental_health_backend.entity.Appointment;
-import com.example.mental_health_backend.entity.Appointment.AppointmentStatus;
-import com.example.mental_health_backend.repository.AppointmentRepository;
+import com.example.mentalhealth.entity.Appointment;
+import com.example.mentalhealth.entity.Appointment.AppointmentStatus;
+import com.example.mentalhealth.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service class for managing appointments.
- * Contains business logic to create an appointment, retrieve appointments for a doctor,
- * and update the status of an appointment.
+ * This service handles the business logic for appointments.
+ * It creates new appointments, fetches appointments for a doctor,
+ * and updates appointment statuses.
  */
 @Service
-@RequiredArgsConstructor  // Lombok generates a constructor with required arguments (appointmentRepository)
+@RequiredArgsConstructor
 public class AppointmentService {
-
     private final AppointmentRepository appointmentRepository;
 
-    /**
-     * Creates a new appointment.
-     * The appointment is saved with a default status of PENDING.
-     *
-     * @param appointment the appointment details provided by the client.
-     * @return the saved appointment entity.
-     */
+    // Creates an appointment with a default status of PENDING.
     public Appointment createAppointment(Appointment appointment) {
-        appointment.setStatus(AppointmentStatus.PENDING); // Set default status
+        appointment.setStatus(AppointmentStatus.PENDING);
         return appointmentRepository.save(appointment);
     }
 
-    /**
-     * Retrieves all appointments for a specific doctor.
-     *
-     * @param doctorId the unique identifier of the doctor.
-     * @return a list of appointments linked to that doctor.
-     */
-    public List<Appointment> getDoctorAppointments(Long doctorId) {
-        return appointmentRepository.findByDoctorId(doctorId);
+    // Returns all appointments for a given doctor.
+    public List<Appointment> getDoctorAppointments(String doctorId) {
+        return appointmentRepository.findByDoctor_Id(doctorId);
     }
 
-    /**
-     * Updates the status of an existing appointment.
-     *
-     * @param id the unique identifier of the appointment.
-     * @param status the new status (APPROVED or DECLINED).
-     * @return the updated appointment entity.
-     * @throws RuntimeException if the appointment is not found.
-     */
-    public Appointment updateAppointmentStatus(Long id, AppointmentStatus status) {
+    // Updates an appointment's status (to APPROVED or DECLINED).
+    public Appointment updateAppointmentStatus(String id, AppointmentStatus status) {
         Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
         appointment.setStatus(status);

@@ -1,35 +1,30 @@
-package com.example.mental_health_backend.entity;
+package com.example.mentalhealth.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import lombok.*;
 import java.time.LocalDateTime;
 
 /**
- * Represents a patient report uploaded by a doctor.
- * Contains file path, associated doctor, patient name, and upload timestamp.
+ * Represents a patient report.
+ * Contains the file location, the doctor who uploaded it, the patient’s name, and the time of upload.
  */
-@Entity
+@Document(collection = "reports")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Report {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // Unique identifier for the report
+    private String id;  // Unique report ID.
 
-    // Many reports can be linked to one doctor.
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private Doctor doctor;
+    @DBRef
+    private Doctor doctor;  // Doctor who uploaded this report.
 
-    // Name of the patient for whom the report is uploaded
-    private String patientName;
+    private String patientName;  // The patient related to the report.
 
-    // File path or URL where the report file is stored
-    private String filePath;
+    private String filePath;  // Location or URL of the report file.
 
-    // Timestamp when the report was uploaded; default is the current time.
-    private LocalDateTime uploadedAt = LocalDateTime.now();
+    private LocalDateTime uploadedAt = LocalDateTime.now();  // Time when the report was uploaded.
 }
