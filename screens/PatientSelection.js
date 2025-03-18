@@ -1,20 +1,21 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
-const PatientSelectionScreen = ({ navigation }) => {
+const PatientHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/patient.png')} style={styles.image} />
-      <Text style={styles.title}>Select Patient Profile</Text>
-      <Text style={styles.subtitle}>Tap to enter as a patient</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PatientHome')}>
-        <Text style={styles.buttonText}>Enter as Patient</Text>
-      </TouchableOpacity>
+      <Image source={require('../assets//images/patient.png')} style={styles.image} />
+      <Text style={styles.title}>Welcome, Patient</Text>
+      <Text style={styles.subtitle}>Your health is our priority</Text>
+      <View style={styles.section}>
+        <Button title="View Health Records" color="#24C17C" onPress={() => navigation.navigate('HealthRecords')} />
+        <Button title="Find a Doctor" color="#FFD700" onPress={() => navigation.navigate('DoctorSelection')} />
+      </View>
     </View>
   );
 };
 
-export default PatientSelectionScreen;
+export default PatientHomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -32,22 +33,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 10,
     color: '#333',
+    marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: '#24C17C',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
+  section: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 20,
   },
 });

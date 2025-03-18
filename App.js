@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import DoctorHomeScreen from './screens/DoctorHome';
 import PatientHomeScreen from './screens/PatientHome';
 import DoctorLoginScreen from './screens/DoctorLogin';
-import PatientSelectionScreen from './screens/PatientSelection';
+import PatientLoginScreen from './screens/PatientLoginScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -40,7 +40,7 @@ function DoctorTabs() {
   );
 }
 
-// ✅ Patient's Bottom Tab Navigator - FIXED
+// Patient's Bottom Tab Navigator
 function PatientTabs() {
   return (
     <Tab.Navigator
@@ -62,13 +62,12 @@ function PatientTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="DoctorLogin">
         <Stack.Screen name="DoctorLogin" component={DoctorLoginScreen} />
-        <Stack.Screen name="PatientSelection" component={PatientSelectionScreen} />
+        <Stack.Screen name="PatientLogin" component={PatientLoginScreen} />
         <Stack.Screen name="DoctorHome" component={DoctorTabs} />
         <Stack.Screen name="PatientHome" component={PatientTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
