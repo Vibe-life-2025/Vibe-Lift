@@ -15,10 +15,10 @@ const Tab = createBottomTabNavigator();
 
 const themeColors = {
   primary: '#24C17C',
-  secondary: '#F8F9FA',
+  secondary: '09D85F',
   text: '#333',
   accent: '#FFD700',
-  background: '#EAF8F1',
+  background: '89FFB9',
   tabInactive: '#A0A0A0',
   cardBackground: '#FFFFFF',
 };

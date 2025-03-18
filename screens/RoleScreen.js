@@ -10,7 +10,7 @@ const RoleScreen = ({ navigation }) => {
           style={[styles.roleButton, styles.patient]} 
           onPress={() => navigation.replace('PatientSelection')}
         >
-          <Image source={require('../assets/images/patient.png')} style={styles.image} />
+          <Image source={require('../assets/images/patient2.png')} style={styles.image} />
           <Text style={styles.roleText}>Patient</Text>
         </TouchableOpacity>
 
@@ -18,7 +18,7 @@ const RoleScreen = ({ navigation }) => {
           style={[styles.roleButton, styles.doctor]} 
           onPress={() => navigation.replace('DoctorLogin')}
         >
-          <Image source={require('../assets/images/doctor.png')} style={styles.image} />
+          <Image source={require('../assets/images/doctor2.png')} style={styles.image} />
           <Text style={styles.roleText}>Doctor</Text>
         </TouchableOpacity>
       </View>
@@ -31,7 +31,7 @@ export default RoleScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: '09D85F',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#24C17C',
   },
   doctor: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#24C17C',
   },
   roleText: {
     fontSize: 18,
