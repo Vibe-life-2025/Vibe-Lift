@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://your-backend-url.com/api"; // Replace with actual backend URL
+const API_BASE_URL = "SDGP backend url"; 
 
 // Default doctors for offline testing
 const defaultDoctors = [
-  { id: "1", name: "Dr. John Doe" },
-  { id: "2", name: "Dr. Jane Smith" },
+  { id: "1", name: "Dr. Akash Ranasinghe" },
+  { id: "2", name: "Dr. Yadev Perera" },
 ];
 
 // Fetch all registered doctors (handles offline and online modes)
