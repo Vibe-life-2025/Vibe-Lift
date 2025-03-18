@@ -5,6 +5,8 @@ import DoctorHomeScreen from './screens/DoctorHome';
 import PatientHomeScreen from './screens/PatientHome';
 import DoctorLoginScreen from './screens/DoctorLogin';
 import PatientLoginScreen from './screens/PatientLoginScreen';
+import RoleScreen from './screens/RoleScreen';
+import PatientSelectionScreen from './screens/PatientSelection';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -62,10 +64,12 @@ function PatientTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="DoctorLogin">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="RoleScreen">
+        <Stack.Screen name="RoleScreen" component={RoleScreen} />
         <Stack.Screen name="DoctorLogin" component={DoctorLoginScreen} />
         <Stack.Screen name="PatientLogin" component={PatientLoginScreen} />
         <Stack.Screen name="DoctorHome" component={DoctorTabs} />
+        <Stack.Screen name="PatientSelection" component={PatientSelectionScreen} />
         <Stack.Screen name="PatientHome" component={PatientTabs} />
       </Stack.Navigator>
     </NavigationContainer>
