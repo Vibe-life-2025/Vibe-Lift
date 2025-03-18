@@ -9,7 +9,7 @@ const AppointmentManagement = ({ route }) => {
   useEffect(() => {
     const loadAppointments = async () => {
       const data = await fetchAppointments(doctorId);
-      setAppointments(data);
+      setAppointments(Array.isArray(data) ? data : []); // Ensure it's always an array
     };
     loadAppointments();
   }, [doctorId]);
@@ -17,7 +17,7 @@ const AppointmentManagement = ({ route }) => {
   const handleAction = async (appointmentId, status) => {
     const result = await updateAppointmentStatus(appointmentId, status);
     Alert.alert(result.success ? "Success" : "Error", result.message);
-    setAppointments(appointments.filter((appt) => appt.id !== appointmentId));
+    setAppointments((prev) => prev.filter((appt) => appt.id !== appointmentId));
   };
 
   return (
@@ -25,7 +25,7 @@ const AppointmentManagement = ({ route }) => {
       <Text style={styles.header}>Manage Appointments</Text>
       <FlatList
         data={appointments}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => String(item.id || Math.random())} // 🔥 Fixed
         renderItem={({ item }) => (
           <View style={styles.appointmentCard}>
             <Text>{item.patientName} - {item.appointmentDate}</Text>
@@ -38,6 +38,10 @@ const AppointmentManagement = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({ container: { padding: 20 } });
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  header: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
+  appointmentCard: { padding: 10, borderBottomWidth: 1, marginBottom: 5 },
+});
 
 export default AppointmentManagement;
