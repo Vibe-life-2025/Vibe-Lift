@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { Video } from 'expo-av';
 
 const DoctorLoginScreen = ({ navigation }) => {
+  const videoRef = useRef(null);
+
   return (
     <View style={styles.container}>
-      {/* AI GIF Background */}
-      <Image source={require('../assets/images/Doctor.gif')} style={styles.gifBackground} />
+      {/* AI Video Background */}
+      <Video
+        ref={videoRef}
+        source={require('../assets/images/Doc.mp4')} // ✅ Path to your AI-generated video
+        style={styles.backgroundVideo}
+        shouldPlay
+        isLooping
+        resizeMode="cover"
+      />
 
       {/* Login UI Overlay */}
       <View style={styles.overlay}>
@@ -28,17 +38,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  gifBackground: {
+  backgroundVideo: {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // ✅ Ensures the GIF fills the screen
   },
   overlay: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)', // ✅ Dark overlay for visibility
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // ✅ Dark overlay for better visibility
     width: '100%',
     height: '100%',
   },
