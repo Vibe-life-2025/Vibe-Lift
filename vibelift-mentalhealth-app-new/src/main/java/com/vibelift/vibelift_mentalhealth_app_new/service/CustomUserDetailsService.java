@@ -40,6 +40,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
+    /*Converts a role string into a list of GrantedAuthority objects
+    This is used by Spring Security to determine the authorities (roles) of a user.
+    @param role The role of the user (e.g., "DOCTOR" or "PATIENT").
+    @return A list of GrantedAuthority objects representing the user's roles.
+     */
     private List<GrantedAuthority> getAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
