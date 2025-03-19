@@ -2,6 +2,7 @@ package com.vibelift.vibelift_mentalhealth_app_new.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -9,6 +10,6 @@ public class PasswordEncoderConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return null; // Placeholder for now
+        return new BCryptPasswordEncoder();
     }
 }
