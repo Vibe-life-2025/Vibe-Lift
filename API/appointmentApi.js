@@ -1,23 +1,25 @@
 import axios from "axios";
 
-const API_BASE_URL = "SDGP backend url"; 
+const API_BASE_URL = "SDGP backend url"; // Replace with actual backend URL
 
 // Default doctors for offline testing
 const defaultDoctors = [
-  { id: "1", name: "Dr. Akash Ranasinghe" },
-  { id: "2", name: "Dr. Yadev Perera" },
+  { id: "1", name: "Dr. Yadev Perera" },
+  { id: "2", name: "Dr. Akash Perera" },
 ];
 
 // Fetch all registered doctors (handles offline and online modes)
 export const fetchDoctors = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/doctors`);
-    return Array.isArray(response.data) ? response.data : defaultDoctors;
+    const response = await fetch(`${API_BASE_URL}/doctors`);
+    const data = await response.json();
+    return Array.isArray(data) ? data : defaultDoctors;
   } catch (error) {
-    console.error("Error fetching doctors:", error);
+    console.error("Fetch API error:", error);
     return defaultDoctors;
   }
 };
+
 
 // Book an appointment
 export const bookAppointment = async (appointmentData) => {
@@ -51,3 +53,4 @@ export const updateAppointmentStatus = async (appointmentId, status) => {
     return { success: false, message: "Could not update appointment status" };
   }
 };
+
