@@ -13,9 +13,9 @@ const AppointmentManagement = ({ route }) => {
 
       // Default data for testing when API is unavailable
       const defaultAppointments = [
-        { id: "101", patientName: "Alice Johnson", appointmentDate: "2025-03-22 10:00 AM" },
-        { id: "102", patientName: "Bob Williams", appointmentDate: "2025-03-22 11:30 AM" },
-        { id: "103", patientName: "Charlie Brown", appointmentDate: "2025-03-22 02:00 PM" },
+        { id: "101", patientName: "Kaveesha Perera", appointmentDate: "2025-03-22 10:00 AM" },
+        { id: "102", patientName: "Dilmi Perera", appointmentDate: "2025-03-22 11:30 AM" },
+        { id: "103", patientName: "Ramesh Pathirana", appointmentDate: "2025-03-22 02:00 PM" },
       ];
 
       // Set the appointments (API data if available, otherwise default data)
