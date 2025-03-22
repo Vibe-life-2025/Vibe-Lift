@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Video } from 'expo-av';
 
 const SplashScreen = ({ navigation }) => {
+  const videoRef = useRef(null);
+
   useEffect(() => {
     // Navigate to RoleScreen after 3 seconds
     const timer = setTimeout(() => {
@@ -13,8 +16,20 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/vibelift-logo.png')} style={styles.logo} />
-      <Text style={styles.title}>VIBE LIFT</Text>
+      {/* Background Video */}
+      <Video
+        ref={videoRef}
+        source={require('../assets/images/splash.mp4')} // ✅ Ensure correct video path
+        style={styles.backgroundVideo}
+        shouldPlay
+        isLooping
+        resizeMode="cover"
+      />
+
+      {/* App Name Overlay */}
+      <View style={styles.overlay}>
+        <Text style={styles.title}>VIBE LIFT</Text>
+      </View>
     </View>
   );
 };
@@ -26,12 +41,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F0F8EE',
   },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
+  backgroundVideo: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)', // ✅ Dark overlay for better visibility
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: 30,
