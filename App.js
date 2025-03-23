@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from './screens/SplashScreen';
 
-
+import PatientSelectionScreen from './screens/PatientSelection';
 import RoleScreen from './screens/RoleScreen';
 import DoctorHomeScreen from './screens/DoctorHome';
 import PatientHomeScreen from './screens/PatientHome';
@@ -70,7 +70,7 @@ export default function App() {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="RoleScreen" component={RoleScreen} />
         <Stack.Screen name="DoctorLogin" component={DoctorLoginScreen} />
-        <Stack.Screen name="PatientLogin" component={PatientLoginScreen} />
+        <Stack.Screen name="PatientSelection" component={PatientSelectionScreen} />
         <Stack.Screen name="DoctorHome" component={DoctorTabs} />
         <Stack.Screen name="PatientHome" component={PatientTabs} />
       </Stack.Navigator>

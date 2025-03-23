@@ -1,76 +1,67 @@
-import React, { useRef } from 'react';
-import { View, Text, Button, StyleSheet, Image } from 'react-native';
-import { Video } from 'expo-av';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-const PatientHomeScreen = ({ navigation }) => {
-  const videoRef = useRef(null);
-
+const PatientSelectionScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {/* Background Video */}
-      <Video
-        ref={videoRef}
-        source={require('../assets/images/Doctor2.mp4')} // ✅ Ensure correct video path
-        style={styles.backgroundVideo}
-        shouldPlay
-        isLooping
-        resizeMode="cover"
-      />
+      <Image source={require('../assets/images/patient.png')} style={styles.image} />
+      <Text style={styles.title}>Welcome Patient</Text>
+      <Text style={styles.subtitle}>Continue to your dashboard</Text>
 
-      {/* Content Overlay */}
-      <View style={styles.overlay}>
-        
-        <Text style={styles.title}>Welcome, Patient</Text>
-        <Text style={styles.subtitle}>Your health is our priority</Text>
-        <View style={styles.section}>
-          <Button title="View Health Records" color="#24C17C" onPress={() => navigation.navigate('HealthRecords')} />
-          <Button title="Find a Doctor" color="#FFD700" onPress={() => navigation.navigate('DoctorSelection')} />
-        </View>
-      </View>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.replace('PatientHome')}>
+        <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.replace('RoleScreen')}>
+        <Text style={styles.backButtonText}>Back to Role Selection</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default PatientHomeScreen;
+export default PatientSelectionScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  backgroundVideo: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)', // ✅ Dark overlay for better visibility
-    width: '100%',
-    height: '100%',
+    backgroundColor: '#EAF8F1',
+    padding: 20,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 140,
     marginBottom: 20,
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#fff', // ✅ White text for better visibility
+    color: '#24C17C',
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
-    color: '#ddd',
-    marginBottom: 20,
+    color: '#666',
+    marginBottom: 25,
   },
-  section: {
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 20,
+  button: {
+    backgroundColor: '#24C17C',
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    color: '#888',
+    fontSize: 14,
   },
 });

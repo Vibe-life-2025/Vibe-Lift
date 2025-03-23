@@ -28,7 +28,7 @@ const SplashScreen = ({ navigation }) => {
 
       {/* App Name Overlay */}
       <View style={styles.overlay}>
-        <Text style={styles.title}>VIBE LIFT</Text>
+        <Text style={styles.title}>Welcome to Vibe Lift</Text>
       </View>
     </View>
   );
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)', // ✅ Dark overlay for better visibility
+    backgroundColor: 'rgba(249, 245, 245, 0.01)', 
     width: '100%',
     height: '100%',
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 'bold',
-    color: '#24C17C',
+    color: 'rgba(43, 235, 9, 0.76)',
   },
 });

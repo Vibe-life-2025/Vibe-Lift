@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const DoctorHomeScreen = ({ navigation }) => {
   return (
@@ -7,9 +7,22 @@ const DoctorHomeScreen = ({ navigation }) => {
       <Image source={require('../assets/images/doctor.png')} style={styles.image} />
       <Text style={styles.title}>Welcome, Doctor</Text>
       <Text style={styles.subtitle}>Manage your appointments and reports</Text>
+
       <View style={styles.section}>
-        <Button title="View Appointments" color="#24C17C" onPress={() => navigation.navigate('AppointmentBooking')} />
-        <Button title="Manage Reports" color="#FFD700" onPress={() => navigation.navigate('Reports')} />
+        <Button
+          title="View Appointments"
+          color="#24C17C"
+          onPress={() => navigation.navigate('AppointmentBooking')}
+        />
+        <Button
+          title="Manage Reports"
+          color="#FFD700"
+          onPress={() => navigation.navigate('Reports')}
+        />
+
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.replace('RoleScreen')}>
+          <Text style={styles.backButtonText}>Back to Role Selection</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -45,5 +58,17 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: 20,
+    gap: 10,
+  },
+  backButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ccc',
+    borderRadius: 6,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: '#333',
   },
 });
